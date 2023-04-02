@@ -3,7 +3,6 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 // Fetch the JSON data and console log it
 d3.json(url).then(function(data) {
     console.log(data);
-
 });
 
 function init() {
@@ -14,10 +13,7 @@ function init() {
     var subjectID = data.names;
 
     for (let i = 0; i < subjectID.length; i++){
-      selector
-        .append("option")
-        .text(subjectID[i])
-        .property("value", subjectID[i]);
+      selector.append("option").text(subjectID[i]).property("value", subjectID[i]);
     };
 
     var initSample = subjectID[0];
@@ -64,7 +60,7 @@ function Charts(sample) {
   });
 }
 
-function optionChanged(newSample) {
+function update(newSample) {
   Charts(newSample);
 }
     
