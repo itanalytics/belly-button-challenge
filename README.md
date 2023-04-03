@@ -12,6 +12,8 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 2. Bubble Chart of Sample Size
 
+3. Panel of Sample Metadata
+
 ### Resources Used
 *https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map*  
 *https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse*  
