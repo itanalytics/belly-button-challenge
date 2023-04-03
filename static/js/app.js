@@ -4,7 +4,7 @@ const url = "https://2u-data-curriculum-team.s3.amazonaws.com/dataviz-classroom/
 d3.json(url).then(function(data) {
     console.log(data);
 });
-
+//Initialize the Dashboard & Get Selected Sample
 function init() {
  
   var selector = d3.select("#selDataset");
@@ -20,9 +20,10 @@ function init() {
     Charts(initSample);
   });
 }
-
+//Function to populate charts from chosen sample
 function Charts(sample) {
   d3.json(url).then(function(data) {
+    //Identify Sample data and store in variables
     var samples = data.samples;
     var results = samples.filter(sampleObj => sampleObj.id == sample);
     var result = results[0];
@@ -42,7 +43,7 @@ function Charts(sample) {
     ];
     
     Plotly.newPlot("bar", bar);
-
+    //Create Bubble Chart
     var bubble = [{
       x: otu_ids,
       y: sample_values,
@@ -56,7 +57,7 @@ function Charts(sample) {
     ];
 
     Plotly.newPlot("bubble", bubble)
-    
+    //Identify Sample Metadata and store in variables
     var metadata = data.metadata;
     var meta_results = metadata.filter(sampleObj => sampleObj.id == sample);
     var meta_result = meta_results[0];
@@ -69,6 +70,7 @@ function Charts(sample) {
     var location = meta_result.location
     var wfreq = meta_result.wfreq
 
+    //Populate Panel With Sample Metadata
     var panel = d3.select('#sample-metadata')
     panel.append("li").text(`ID: ${id}`)
     panel.append("li").text(`Ethnicity: ${ethnicity}`)
@@ -80,15 +82,15 @@ function Charts(sample) {
     
   });
 }
-
+//Function to reset the Panel when a new Sample is chosen
 function resetPanel(){
   var panel = d3.select('#sample-metadata')
   panel.html("")
 }
-
+//Function to Update Dashboard
 function optionChanged(newSample) {
-  Charts(newSample);
   resetPanel();
+  Charts(newSample);
 }
-    
+//Initialize the Dashboard    
 init();
