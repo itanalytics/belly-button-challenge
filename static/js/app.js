@@ -55,13 +55,40 @@ function Charts(sample) {
     }
     ];
 
-  Plotly.newPlot("bubble", bubble)
+    Plotly.newPlot("bubble", bubble)
+    
+    var metadata = data.metadata;
+    var meta_results = metadata.filter(sampleObj => sampleObj.id == sample);
+    var meta_result = meta_results[0];
 
+    var age = meta_result.age
+    var bbtype = meta_result.bbtype
+    var ethnicity = meta_result.ethnicity
+    var gender = meta_result.gender
+    var id = meta_result.id
+    var location = meta_result.location
+    var wfreq = meta_result.wfreq
+
+    var panel = d3.select('#sample-metadata')
+    panel.append("li").text(`ID: ${id}`)
+    panel.append("li").text(`Ethnicity: ${ethnicity}`)
+    panel.append("li").text(`Gender: ${gender}`)
+    panel.append("li").text(`Age: ${age}`)
+    panel.append("li").text(`Location: ${location}`)
+    panel.append("li").text(`BBType: ${bbtype}`)
+    panel.append("li").text(`WFreq: ${wfreq}`)
+    
   });
 }
 
-function update(newSample) {
+function resetPanel(){
+  var panel = d3.select('#sample-metadata')
+  panel.html("")
+}
+
+function optionChanged(newSample) {
   Charts(newSample);
+  resetPanel();
 }
     
 init();
